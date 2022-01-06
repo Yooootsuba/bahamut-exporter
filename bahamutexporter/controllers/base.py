@@ -2,6 +2,7 @@
 from cement import Controller, ex
 from cement.utils.version import get_version_banner
 from ..core.version import get_version
+from ..core.service import BamahutExporterService
 
 VERSION_BANNER = """
 Exports floors and replies in Bahamut posts %s
@@ -17,7 +18,7 @@ class Base(Controller):
         description = 'Exports floors and replies in Bahamut posts'
 
         # text displayed at the bottom of --help output
-        epilog = 'Usage: bahamutexporter command1 --foo bar'
+        epilog = 'Usage: bahamutexporter -u URL'
 
         # controller level arguments. ex: 'bahamutexporter --version'
         arguments = [
@@ -25,36 +26,17 @@ class Base(Controller):
             ( [ '-v', '--version' ],
               { 'action'  : 'version',
                 'version' : VERSION_BANNER } ),
+            ( [ '-u', '--url' ],
+              { 'action'  : 'store',
+                'dest' : 'url' } ),
         ]
 
 
     def _default(self):
         """Default action if no sub-command is passed."""
 
-        self.app.args.print_help()
-
-
-    @ex(
-        help='example sub command1',
-
-        # sub-command level arguments. ex: 'bahamutexporter command1 --foo bar'
-        arguments=[
-            ### add a sample foo option under subcommand namespace
-            ( [ '-f', '--foo' ],
-              { 'help' : 'notorious foo option',
-                'action'  : 'store',
-                'dest' : 'foo' } ),
-        ],
-    )
-    def command1(self):
-        """Example sub-command."""
-
-        data = {
-            'foo' : 'bar',
-        }
-
-        ### do something with arguments
-        if self.app.pargs.foo is not None:
-            data['foo'] = self.app.pargs.foo
-
-        self.app.render(data, 'command1.jinja2')
+        if self.app.pargs.url is None:
+            self.app.args.print_help()
+        else:
+            service = BamahutExporterService()
+            service.export()

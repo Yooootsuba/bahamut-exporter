@@ -1,0 +1,37 @@
+{
+    "0": {
+        "bsn": "60111",
+        "sn": "3068706",
+        "userid": "happy819tw",
+        "comment": "3",
+        "gp": "0",
+        "bp": "0",
+        "wtime": "2022-01-02 14:16:22",
+        "mtime": "2022-01-03 10:54:32",
+        "delreason": "",
+        "state": "exist",
+        "type": "nologin",
+        "content": "3",
+        "snB": "362133",
+        "time": "昨天14:16",
+        "nick": "Yotsuba"
+    },
+    "1": {
+        "bsn": "60111",
+        "sn": "3068570",
+        "userid": "happy819tw",
+        "comment": "2",
+        "gp": "0",
+        "bp": "0",
+        "wtime": "2022-01-02 12:09:00",
+        "mtime": "2022-01-03 10:54:29",
+        "delreason": "",
+        "state": "exist",
+        "type": "nologin",
+        "content": "2",
+        "snB": "362133",
+        "time": "昨天12:09",
+        "nick": "Yotsuba"
+    },
+    "next_snC": 0
+}
