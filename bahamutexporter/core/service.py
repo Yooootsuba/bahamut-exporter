@@ -1,4 +1,5 @@
 import re
+import html
 import json
 import requests
 from bs4 import BeautifulSoup
@@ -23,9 +24,10 @@ class BamahutExporterService:
         for reply in response.values():
             replies.append(
                 {
+                    'username' : reply['userid'],
                     'nickname' : reply['nick'],
-                    'datetime' : reply['mtime'],
-                    'content'  : reply['content'],
+                    'datetime' : reply['wtime'],
+                    'content'  : html.escape('{"content":"%s"}' % reply['content']),
                 }
             )
 
@@ -46,7 +48,7 @@ class BamahutExporterService:
                 'username' : floor.find('a', {'class': 'userid'}).text,
                 'nickname' : floor.find('a', {'class': 'username'}).text,
                 'datetime' : floor.find('a', {'class': 'edittime tippy-post-info'}).get('data-mtime'),
-                'content'  : floor.find('div', {'class': 'c-article__content'}).text.strip(),
+                'content'  : floor.find('div', {'class': 'c-article__content'}),
                 'replies'  : self.parse_replies(bsn, floor.get('id').replace('post_', '')),
             }
 

@@ -1,0 +1,208 @@
+<html>
+   <head>
+      <link href="https://i2.bahamut.com.tw/css/basic.css?v=1639465219" rel="stylesheet" type="text/css" />
+      <link href="https://i2.bahamut.com.tw/css/forum.css?v=1635215027" rel="stylesheet" type="text/css">
+      <link href="https://i2.bahamut.com.tw/css/forum_wide.css" rel="stylesheet" type="text/css">
+      <link href="https://i2.bahamut.com.tw/css/photoswipe/photoswipe.css" rel="stylesheet">
+      <link href="https://i2.bahamut.com.tw/css/photoswipe/default-skin/default-skin.css" rel="stylesheet">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+      <script src="https://i2.bahamut.com.tw/js/plugins/js.cookie-2.1.4.js"></script>
+      <script src="https://i2.bahamut.com.tw/js/plugins/tippy-1.4.0.min.js"></script>
+      <script src="https://i2.bahamut.com.tw/js/plugins/lazysizes-3.0.0.min.js" async></script>
+      <script src="https://i2.bahamut.com.tw/js/photoswipe/photoswipe.min.js"></script>
+      <script src="https://i2.bahamut.com.tw/js/photoswipe/photoswipe-ui-default.min.js"></script>
+      <script src="https://i2.bahamut.com.tw/js/forum_common.js?v=1633489451"></script>
+      <script src="https://i2.bahamut.com.tw/js/honorData.js?v=1639566016"></script>
+      <script src="https://i2.bahamut.com.tw/js/movetomobile.js"></script>
+      <script src="https://i2.bahamut.com.tw/js/forum_c.js?v=1641451654"></script>
+   </head>
+   <body>
+      <div id="BH-menu-path" class="BH-menu "></div>
+      <div id="bh-banner" class="bh-banner "></div>
+      <div id="BH-background">
+         <div id="BH-wrapper" class="">
+            <div style="width:0;height:0;position:relative;top:0px;left:0px;z-index:100;">
+               <div style="position:absolute; top:0px; left:730px; width:268px; border: solid 1px #000000; background: #FFFFFF; z-index:100;display:none;" class="rsearch" id="rsearch" align="left">
+                  <ol id="suggestol"></ol>
+               </div>
+            </div>
+            <div id="BH-master">
+               <!-- 樓層開始 !-->
+      {% for floor in floors -%}
+      {% if 'hint' in floor -%}
+      <section class="c-section">
+         <div class="c-section__main c-disable nocontent">
+            <div class="floor">{{ floor.floor }}</div>
+            <div class="hint">{{ floor.hint }}</div>
+         </div>
+      </section>
+      {% else %}
+      <section class="c-section">
+         <div class="c-section__main c-post ">
+         <div class="c-post__header">
+            <div class="c-post__header__author">
+               <a class="floor tippy-gpbp">{{ floor.floor }}</a>
+               <a href="https://home.gamer.com.tw/{{ floor.username }}" class="username" target="_blank">{{ floor.nickname }}</a>
+               <a href="https://home.gamer.com.tw/{{ floor.username }}" class="userid" target="_blank">{{ floor.username }}</a>
+            </div>
+            <div class="c-post__header__info">
+               <a class="edittime tippy-post-info">{{ floor.datetime }}</a>
+            </div>
+         </div>
+         <div class="c-post__body">
+            <article class="c-article FM-P2">
+                {{ floor.content }}
+            </article>
+         </div>
+         <div class="c-post__footer c-reply">
+         {% for reply in floor.replies %}
+         <div class="c-reply__item" data-comment="{{ reply.content }}">
+            <div>
+               <div class="reply-content">
+                  <a class="reply-content__user" href="https://home.gamer.com.tw/{{ reply.username }}" target="_blank">{{ reply.nickname }}</a>
+                  <article class="reply-content__article c-article "><span></span></article>
+                  <div class="reply-content__footer">
+                     <div class="edittime">{{ reply.datetime }}</div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         {% endfor %}
+      </section>
+      {%- endif %}
+      {%- endfor %}
+               <!-- 樓層結束 -->
+            </div>
+            <!--內容左側區塊結束-->
+            <div id="BH-slave">
+               <!--右側區塊-->
+               <div id="optionMenu" style="display:none;"></div>
+               <div id="postInfo" style="display:none;"></div>
+               <div id="replyMenu" style="display:none;"></div>
+               <div id="gpbpList" style="display:none;"></div>
+
+               <script type="text/javascript">
+                  var attachMediaLogin = 'N';
+
+
+                  if ('1' == '0') {
+                  location.href = "#down";
+                  } else if (0 != 0) {
+                  location.href = "#0";
+                  }
+
+                  //巴哈商城
+                  if ($('#gshop_link').size()) {
+                  var btn_gshop_link = $('#gshop_link').html();
+                  $('#gshop_link').html('');
+                  } else {
+                  var btn_gshop_link = '';
+                  }
+
+                  buttonToMobile();
+
+                  jQuery(function() {
+                  Forum.C.bindOptionMenuTippy();
+                  Forum.C.bindPostInfoTippy();
+                  Forum.C.bindManageMenuTippy();
+                  Forum.C.bindReplyMenuTippy();
+                  Forum.C.bindSimpleTippy();
+                  Forum.C.bindCommentWarningTippy();
+                  Forum.C.bindGpBpListTippy();
+                  Forum.C.showDonateHint();
+                  Forum.C.bindDonorListTippy();
+                  Forum.C.bindArticleFooterButtonHover();
+                  Forum.C.bindCommentGpBpListTippy();
+                  Forum.C.bindCommentDateTippy();
+                  Forum.C.initCommentInput();
+                  Forum.C.showHonor();
+                  Forum.C.dockedTitle();
+                  Forum.C.commentFormatter('.reply-content__article > span');
+                  Forum.Common.initPhotoSwipe('.c-article__content');
+                  Forum.Common.initPhotoSwipe('.c-reply');
+                  Forum.Common.addDarkThemeSwitch();
+                  Forum.Common.resizeImage(688, 2);
+
+                  Forum.C.showAd(true, '60111');
+
+                  Forum.C.bindTemplateList();
+                  Forum.Common.bindGifBox('top');
+                  Forum.C.bindEditor();
+                  Forum.Editor.bindToolbarClick();
+                  Forum.CEditor.initDropdownList();
+                  Forum.Editor.initEmoticonPanel();
+
+                  var hash = window.location.hash;
+                  if (hash && hash.indexOf('#reply') === 0) {
+                  var sn = hash.substring('#reply'.length);
+                  var commentEditor = jQuery('#post_' + sn + ' .reply-input .content-edit');
+                  window.scroll({
+                  top: commentEditor.offset().top - 240,
+                  left: 0,
+                  behavior: 'smooth'
+                  });
+
+                  setTimeout(function() {
+                  commentEditor.focus();
+                  }, 1000);
+                  }
+
+                  if (hash && hash.indexOf('#donate') === 0) {
+                  let sn = hash.substring('#donate'.length);
+                  let postBlock = jQuery(`#post_${sn}`);
+                  window.scroll({top: postBlock.top, left: 0, behavior: 'smooth'});
+                  setTimeout(function() {
+                  Forum.C.donate(null, '60111', '121594', parseInt(sn, 10))
+                  }, 1000);
+                  }
+
+                  });
+
+                  jQuery(window).load(function() {
+                  bahaRteStart('editor', 720, 120, 'editorContainer', 'toolbar');
+                  window.onbeforeunload = null;
+                  });
+               </script>
+               <!-- dialog templates -->
+               <!-- end of dialog templates -->
+               <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+                  <div class="pswp__bg"></div>
+                  <div class="pswp__scroll-wrap">
+                     <div class="pswp__container">
+                        <div class="pswp__item"></div>
+                        <div class="pswp__item"></div>
+                        <div class="pswp__item"></div>
+                     </div>
+                     <div class="pswp__ui pswp__ui--hidden">
+                        <div class="pswp__top-bar">
+                           <div class="pswp__counter"></div>
+                           <button class="pswp__button pswp__button--close" title="關閉"></button>
+                           <button class="pswp__button pswp__button--share" title="分享"></button>
+                           <button class="pswp__button pswp__button--fs" title="全螢幕"></button>
+                           <button class="pswp__button pswp__button--zoom" title="放大/縮小"></button>
+                           <div class="pswp__preloader">
+                              <div class="pswp__preloader__icn">
+                                 <div class="pswp__preloader__cut">
+                                    <div class="pswp__preloader__donut"></div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                           <div class="pswp__share-tooltip"></div>
+                        </div>
+                        <button class="pswp__button pswp__button--arrow--left" title="上一張">
+                        </button>
+                        <button class="pswp__button pswp__button--arrow--right" title="下一張">
+                        </button>
+                        <div class="pswp__caption">
+                           <div class="pswp__caption__center"></div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>

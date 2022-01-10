@@ -1,4 +1,5 @@
 
+from urllib.parse import urlparse, parse_qs
 from cement import Controller, ex
 from cement.utils.version import get_version_banner
 from ..core.version import get_version
@@ -39,4 +40,6 @@ class Base(Controller):
             self.app.args.print_help()
         else:
             service = BamahutExporterService()
-            service.export()
+            queries = parse_qs(urlparse(self.app.pargs.url).query)
+            floors  = {'floors': service.export(queries['bsn'][0], queries['snA'][0])}
+            self.app.render(floors, 'html.jinja2')
