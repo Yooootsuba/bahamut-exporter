@@ -1,6 +1,12 @@
-# Exports floors and replies in Bahamut posts
+# bahamut-exporter
 
-## Installation
+## 功能
+
+匯出巴哈姆特文章中的所有樓層和留言到一份全新的 HTML 檔案
+
+樓層一頁到底，留言也不需要手動展開，適合搭配瀏覽器的 Ctrl + F 快速搜尋字串
+
+## 安裝
 
 ```
 $ pip install -r requirements.txt
@@ -8,62 +14,8 @@ $ pip install -r requirements.txt
 $ python setup.py install
 ```
 
-## Development
-
-This project includes a number of helpers in the `Makefile` to streamline common development tasks.
-
-### Environment Setup
-
-The following demonstrates setting up and working with a development environment:
+## 使用
 
 ```
-### create a virtualenv for development
-
-$ make virtualenv
-
-$ source env/bin/activate
-
-
-### run bahamutexporter cli application
-
-$ bahamutexporter --help
-
-
-### run pytest / coverage
-
-$ make test
-```
-
-
-### Releasing to PyPi
-
-Before releasing to PyPi, you must configure your login credentials:
-
-**~/.pypirc**:
-
-```
-[pypi]
-username = YOUR_USERNAME
-password = YOUR_PASSWORD
-```
-
-Then use the included helper function via the `Makefile`:
-
-```
-$ make dist
-
-$ make dist-upload
-```
-
-## Deployments
-
-### Docker
-
-Included is a basic `Dockerfile` for building and distributing `Bahamut Exporter`,
-and can be built with the included `make` helper:
-
-```
-$ make docker
-
-$ docker run -it bahamutexporter --help
+$ bahamutexporter -u https://forum.gamer.com.tw/C.php?bsn=00000&snA=00000 > output.html
 ```
