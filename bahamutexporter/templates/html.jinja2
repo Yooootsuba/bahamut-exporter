@@ -56,11 +56,11 @@
          </div>
          <div class="c-post__footer c-reply">
          {% for reply in floor.replies %}
-         <div class="c-reply__item" data-comment="{{ reply.content }}">
+         <div class="c-reply__item" data-comment="{{ reply.comment }}">
             <div>
                <div class="reply-content">
                   <a class="reply-content__user" href="https://home.gamer.com.tw/{{ reply.username }}" target="_blank">{{ reply.nickname }}</a>
-                  <article class="reply-content__article c-article "><span></span></article>
+                  <article class="reply-content__article c-article "><span>{{ reply.content }}</span></article>
                   <div class="reply-content__footer">
                      <div class="edittime">{{ reply.datetime }}</div>
                   </div>

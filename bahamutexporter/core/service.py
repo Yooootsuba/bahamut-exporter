@@ -27,7 +27,8 @@ class BamahutExporterService:
                     'username' : reply['userid'],
                     'nickname' : reply['nick'],
                     'datetime' : reply['wtime'],
-                    'content'  : html.escape('{"content":"%s"}' % reply['content']),
+                    'content'  : reply['content'],
+                    'comment'  : html.escape('{"content":"%s"}' % reply['content']),
                 }
             )
 
