@@ -17,5 +17,5 @@ $ python setup.py install
 ## 使用
 
 ```
-$ bahamutexporter -u https://forum.gamer.com.tw/C.php?bsn=00000&snA=00000 > output.html
+$ bahamutexporter -u "https://forum.gamer.com.tw/C.php?bsn=00000&snA=00000" > output.html
 ```
